@@ -7,7 +7,7 @@ import com.xinguangnet.xglocation.utils.LocationUtils;
 import com.xinguangnet.xglocation.utils.ResultUtils;
 
 /**
- * TODO
+ * 数据结果封装类
  * Created by BoQin on 2018/3/2.
  * Modified by BoQin
  *
@@ -18,8 +18,8 @@ public class MapLocationBean {
     public static final String LOCATION_ERROR = "获取定位信息失败";
     private AMapLocation mMapLocation;
 
-    public MapLocationBean(AMapLocation mMapLocation){
-        mMapLocation = mMapLocation;
+    public MapLocationBean(AMapLocation mapLocation){
+        mMapLocation = mapLocation;
     }
 
     /**
