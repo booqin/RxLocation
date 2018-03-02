@@ -94,7 +94,7 @@ def enableSeparateBuildPerCPUArchitecture = false
 def enableProguardInReleaseBuilds = false
 
 android {
-    compileSdkVersion 23
+    compileSdkVersion 26
     buildToolsVersion '26.0.2'
 
     defaultConfig {
@@ -115,10 +115,27 @@ android {
             include "armeabi-v7a", "x86"
         }
     }
+
+    signingConfigs{
+        release {
+            storeFile file(MYAPP_RELEASE_STORE_FILE)
+            storePassword MYAPP_RELEASE_STORE_PASSWORD
+            keyAlias MYAPP_RELEASE_KEY_ALIAS
+            keyPassword MYAPP_RELEASE_KEY_PASSWORD
+        }
+    }
+
     buildTypes {
         release {
             minifyEnabled enableProguardInReleaseBuilds
             proguardFiles getDefaultProguardFile("proguard-android.txt"), "proguard-rules.pro"
+            signingConfig signingConfigs.release
+            manifestPlaceholders = [map_app_key: "10a419bb6accb1243cad4d6e249b3279"]
+        }
+
+        debug {
+            signingConfig signingConfigs.release
+            manifestPlaceholders = [map_app_key: "10a419bb6accb1243cad4d6e249b3279"]
         }
     }
     // applicationVariants are e.g. debug, release
@@ -137,9 +154,11 @@ android {
 }
 
 dependencies {
-    compile fileTree(dir: "libs", include: ["*.jar"])
-    compile "com.android.support:appcompat-v7:23.0.1"
-    compile "com.facebook.react:react-native:+"  // From node_modules
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'com.android.support:appcompat-v7:26.1.0'
+    implementation 'com.facebook.react:react-native:+'
+    // From node_modules
+    api project(':xglocation')
 }
 
 // Run this once to be able to run the application with BUCK

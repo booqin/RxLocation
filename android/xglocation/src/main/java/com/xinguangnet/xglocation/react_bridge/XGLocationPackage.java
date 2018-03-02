@@ -11,7 +11,7 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.uimanager.ViewManager;
 
 /**
- * TODO
+ * 定位
  * Created by BoQin on 2018/3/1.
  * Modified by BoQin
  *

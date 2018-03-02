@@ -8,7 +8,7 @@ import android.provider.Settings;
 import android.util.Log;
 
 /**
- * TODO
+ * 系统设置工具类
  * Created by BoQin on 2018/3/1.
  * Modified by BoQin
  *
@@ -23,8 +23,8 @@ public class SettingUtils {
         Intent localIntent = new Intent(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
         //        localIntent.setData(Uri.fromParts("package", mContext.getPackageName(), null));
         Log.d("TFN", "开始跳到GPS设置页面");
-        // 这里其实可以改成直接startActivity的，result监听暂时没有使用
-        activity.startActivityForResult(localIntent, GPS_REQUEST_CODE);
+        // 这里其实可以改成直接startActivity的，result监听暂时没有使用E
+        activity.startActivity(localIntent);
     }
 
     public static void goApplicationLocationSetting(Activity activity) {
