@@ -1,3 +1,5 @@
+<!--Created by BoQin-->
+
 ## 使用说明
 
 项目依赖该库后，需要做如下额外操作：
@@ -11,6 +13,10 @@
 ```
 
 ### 相关接口
+
+RN调用XGLocation.js文件，通过Promise返回。
+
+原生直接调用XGLocation类，返回一个Observable对象，通过Subscribe获取MapLocationBean。
 
 ```java
 
@@ -67,3 +73,11 @@
      *          formattedAddress: 'xxxxxxxx',   string 格式化地址
      *      }
 ```
+
+### 结果码
+resultCode与errorCode一致，大部分errorCode与高德的错误码相同，参考[错误码对照表](http://lbs.amap.com/api/android-location-sdk/guide/utilities/errorcode)
+
+部分自定义的错误码：
+
+- -999 未知错误
+- -899 GPS未开启

@@ -1,5 +1,7 @@
 package com.xinguangnet.xglocation.react_bridge;
 
+import static com.xinguangnet.xglocation.utils.ResultUtils.ERROR_GPS_CODE;
+
 import com.amap.api.location.AMapLocation;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.bridge.Promise;
@@ -7,8 +9,6 @@ import com.facebook.react.bridge.ReactApplicationContext;
 import com.facebook.react.bridge.ReactContextBaseJavaModule;
 import com.facebook.react.bridge.ReactMethod;
 import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.bridge.WritableNativeMap;
-import com.xinguangnet.xglocation.bean.MapLocationBean;
 import com.xinguangnet.xglocation.observables.LocationObservable;
 import com.xinguangnet.xglocation.utils.LocationUtils;
 import com.xinguangnet.xglocation.utils.ResultUtils;
@@ -70,11 +70,12 @@ public class XGLocationModule extends ReactContextBaseJavaModule {
         map.putBoolean("gpsPermission", false);// 系统gps定位权限
         map.putBoolean("appPermission", true);// 应用定位权限
         map.putString("error", "GPS未开启");
+        map.putString("errorCode", ""+ERROR_GPS_CODE);
 
         // 开始定位，首先判断GPS定位权限有没有被关闭，如果关闭直接返回
         boolean isGPSOpened = LocationUtils.isGPSOpened(mContext.getApplicationContext());
         if (!isGPSOpened) {// GPS权限没开，直接返回
-            promise.resolve(ResultUtils.getResultMap("-400", "GPS未开启", map));
+            promise.resolve(ResultUtils.getResultMap(""+ERROR_GPS_CODE, "GPS未开启", map));
             return;
         }
 
@@ -104,9 +105,8 @@ public class XGLocationModule extends ReactContextBaseJavaModule {
      * 定位有可能失败，如果失败，请先检查是否由于定位权限导致的
      */
     private void handleLocation(AMapLocation aMapLocation, Promise promise){
-        MapLocationBean locationBean = new MapLocationBean(aMapLocation);
         if (promise!=null) {
-            promise.resolve(locationBean.getWritableMap());
+            promise.resolve(ResultUtils.getWritableMap(aMapLocation));
         }
     }
 
