@@ -38,7 +38,7 @@ public class LocationObservable extends Observable<AMapLocation>{
     }
 
     private LocationObservable(Context context){
-        mLocationClient = new AMapLocationClient(context);
+        mLocationClient = new AMapLocationClient(context.getApplicationContext());
 
     }
 
