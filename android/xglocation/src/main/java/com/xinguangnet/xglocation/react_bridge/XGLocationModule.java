@@ -48,13 +48,17 @@ public class XGLocationModule extends ReactContextBaseJavaModule {
 
     /**
      * 由于Android碎片化，我们无法准确获取权限，该方法暂只适应判断GPS是否打开
-     * @return is gps opened <p>true：打开； false：关闭
+     * gpsPermission true：打开； false：关闭
+     * appPermission true
      */
     @ReactMethod
-    public boolean checkPermissions(){
-        return LocationUtils.isGPSOpened(mContext);
+    public void checkPermissions(final Promise promise){
+        WritableMap map = Arguments.createMap();
+        boolean isGspOpened = LocationUtils.isGPSOpened(mContext);
+        map.putBoolean("gpsPermission", isGspOpened);
+        map.putBoolean("appPermission", true);
+        promise.resolve(map);
     }
-
     /**
      * 获取当前位置，只定位一次
      */
