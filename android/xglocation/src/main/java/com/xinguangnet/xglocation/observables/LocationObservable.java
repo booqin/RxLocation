@@ -100,6 +100,8 @@ public class LocationObservable extends Observable<AMapLocation>{
         public void dispose() {
             mIsDispose = true;
             mLocationClient.setLocationListener(null);
+            mLocationClient.stopLocation();
+            mLocationClient.onDestroy();
         }
 
         @Override

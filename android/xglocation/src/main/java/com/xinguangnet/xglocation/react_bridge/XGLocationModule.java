@@ -149,4 +149,12 @@ public class XGLocationModule extends ReactContextBaseJavaModule {
 
         SettingUtils.goSystemLocationSetting(currentActivity);
     }
+
+    @Override
+    public void onCatalystInstanceDestroy() {
+        super.onCatalystInstanceDestroy();
+        if (mDisposable!=null) {
+            mDisposable.dispose();
+        }
+    }
 }
